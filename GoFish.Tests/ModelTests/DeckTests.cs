@@ -29,20 +29,31 @@ namespace GoFish.Tests
         [TestMethod]
         public void ShuffleDeck_ReturnsShuffledDeck_Deck()
         {
-            // Deck newDeck3 = new Deck();
-            // Card aCard = Card("hearts", "5");
-            // Card randomCard = newDeck3.ShuffleDeck;
-            // Assert.AreEqual
 
-            Deck deck = new Deck();
-            List<Card> originalOrder = new List<Card>(deck.cards);
+            Deck originaldeck = new Deck();
+            List<Card> originalOrder = Deck.GetAll();
 
+            Deck shuffledDeck = new Deck();
+            List<Card> shuffledOrder;
+            
             // Act
-            deck.ShuffleDeck();
-            List<Card> shuffledOrder = deck.cards;
+            shuffledDeck.ShuffleDeck();
+            shuffledOrder = Deck.GetAll();
 
             // Assert
             CollectionAssert.AreNotEqual(originalOrder, shuffledOrder);
+        }
+
+
+        [TestMethod]
+        public void DrawCard_ReturnsDrawnCard_Card()
+        {
+            Deck newDeck = new Deck();
+            newDeck.ShuffleDeck();
+            newDeck.DrawCard();
+            List<Card> deckAfterDraw = Deck.GetAll();
+
+            Assert.AreEqual(51, deckAfterDraw.Count);
         }
     }
 }

@@ -2,16 +2,21 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+
 namespace GoFish.Models
 {
     public class Deck
     {
-        private List<Card> cards = new List<Card> {};
+        private static List<Card> cards = new List<Card> {};
 
         public Deck()
         {
-            cards = new List<Card>{};
             InitializeDeck();
+        }
+
+        public static List<Card> GetAll()
+        {
+            return cards;
         }
 
         private void InitializeDeck()
@@ -28,6 +33,14 @@ namespace GoFish.Models
                     cards.Add(new Card(suit, rank));
                 }
             }
+        }
+
+        public Card DrawCard()
+        {
+            Card drawnCard = cards[0];
+            cards.RemoveAt(0);
+            return drawnCard;
+
         }
 
             public int CardsCount
